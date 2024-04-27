@@ -1,13 +1,11 @@
 import { Router } from 'express';
 import { jwtVerify } from '../../middlewares/jwtVerify.js';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../lib/prisma.js';
 
 const router = Router();
 
 router.get('/', jwtVerify, async (req, res) => {
   try {
-    const prisma = new PrismaClient();
-
     const user = await prisma.user.findUnique({
       where: {
         id: req.user.id

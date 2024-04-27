@@ -1,4 +1,3 @@
-import { PrismaClient } from '@prisma/client';
 import { Router } from 'express';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
@@ -6,6 +5,7 @@ import {
   ACCESS_TOKEN_EXPIRES_IN,
   REFRESH_TOKEN_EXPIRES_IN
 } from '../../lib/constants.js';
+import { prisma } from '../../lib/prisma.js';
 
 const router = Router();
 
@@ -20,8 +20,6 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    const prisma = new PrismaClient();
-
     const user = await prisma.user.findUnique({
       where: {
         email

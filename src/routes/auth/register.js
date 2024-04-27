@@ -1,5 +1,6 @@
-import { PrismaClient, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { Router } from 'express';
+import { prisma } from '../../lib/prisma.js';
 import argon2 from 'argon2';
 
 const router = Router();
@@ -15,8 +16,6 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    const prisma = new PrismaClient();
-
     const user = await prisma.user.create({
       data: {
         email,

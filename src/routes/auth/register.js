@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
 
   if (!email || !password) {
     return res.status(400).json({
-      error: 'Email and password are required'
+      error: 'Email và mật khẩu không được để trống'
     });
   }
 
@@ -33,14 +33,14 @@ router.post('/', async (req, res) => {
       error.code === 'P2002'
     ) {
       return res.status(422).json({
-        error: 'User already exists'
+        error: 'Email đã tồn tại'
       });
     }
 
     console.error(error);
 
     return res.status(500).json({
-      error: 'Internal server error'
+      error: 'Lỗi không xác định, vui lòng thử lại sau'
     });
   }
 });
